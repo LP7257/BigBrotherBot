@@ -6,7 +6,9 @@ Main purpose is to optimize more efficient leadership in the guild.
 Bot has the following commands,
 
 /entries - lists all entries
+
 /meta - lists only META entries
+
 /anomalies - lists only non-META entries
 
 Each command requires a time input (game has a separate timer) which is used to sort out already handled entries.
