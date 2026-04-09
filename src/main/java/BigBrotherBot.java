@@ -39,15 +39,19 @@ public class BigBrotherBot {
 
         jda.upsertCommand("meta","Lists Raid battles that used META teams since the last time command was used")
                 .addOption(OptionType.INTEGER, "time", "Last listed time the command was summoned", true)
+                .addOption(OptionType.INTEGER, "type", "Type 1 is plain text format. Type 2 is using emojis if they are established on a server", true)
                 .queue();
 
         jda.upsertCommand("entries", "Shows raid entries since the last time command was used")
                 .addOption(OptionType.INTEGER, "time", "Last listed time the command was summoned", true)
+                .addOption(OptionType.INTEGER, "type", "Type 1 is plain text format. Type 2 is using emojis if they are established on a server", true)
                 .queue();
 
         jda.upsertCommand("anomalies","Lists Raid battles that used non-META teams since the last time command was used")
                 .addOption(OptionType.INTEGER, "time", "Last listed time the command was summoned", true)
+                .addOption(OptionType.INTEGER, "type", "Type 1 is plain text format. Type 2 is using emojis if they are established on a server", true)
                 .queue();
+
     }
 
 }

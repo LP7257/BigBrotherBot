@@ -12,7 +12,7 @@ public class GRseason {
     public List<Entry> getEntries() { return entries; }
 
     /*
-     * Unused for now
+     * Used in the start of listing
      */
     private static int season;
     public static int getSeason() { return season; }

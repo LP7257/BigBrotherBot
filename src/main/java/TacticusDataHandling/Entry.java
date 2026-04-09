@@ -11,6 +11,12 @@ public class Entry {
     // type is the Boss in question
     private String type;
 
+    // unitId differentiates the side bosses from the boss
+    private String unitId;
+
+    // rarity refers to the tier of the boss: common -> uncommon -> rare -> epic -> legendary -> mythic
+    private String rarity;
+
     // damageDealt is the damage from that entry
     private int damageDealt;
 
@@ -20,15 +26,23 @@ public class Entry {
     // HeroDetails contains a list off unitIds that HeroDetail class returned
     private List<HeroDetail> heroDetails;
 
+    private MoWDetail machineOfWarDetails;
+
+    // private BossDetail bossDetails;
     // startedOn serves a crucial identifier for the entry, it will be used to weed out already listed entries, since it is a constantly growing variable.
     public long startedOn;
 
+
     // Getters
+    // public String getBossIdNormalized() { return unitId.replaceAll("\\d+", ""); } not necessary
+    public MoWDetail getMachineOfWarDetails() { return machineOfWarDetails; }
     public String getUserId() { return userId; }
+    public String getBossId() { return unitId; }
+    public String getRarity() { return rarity; }
     public int getDamageDealt() { return damageDealt; }
     public DamageType getDamageType() { return damageType; }
     public List<HeroDetail> getHeroDetails() { return heroDetails; }
-    public String getType() { return type; }
-    public long getStartedOn() { return startedOn; }
 
+    // public String getType() { return type; } not necessary
+    public long getStartedOn() { return startedOn; }
 }

@@ -1,5 +1,7 @@
 package TacticusDataHandling;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -8,10 +10,12 @@ import java.util.stream.Collectors;
  */
 public class MetaOrNot {
 
-    // Set contains the current recognized META teams
-    private static final Set<Set<String>> META_TEAMS = Set.of(
+    // Map contains the current recognized META teams
+    private static final Map<Set<String>, Set<String>> META_TEAMS = new LinkedHashMap<>();
+
+    static {
             // Original Custodes shell
-            Set.of(
+            META_TEAMS.put( Set.of(
                     "worldKharn",
                     "spaceBlackmane",
                     "bloodDante",
@@ -19,10 +23,15 @@ public class MetaOrNot {
                     "custoBladeChampion",
                     "blackAbaddon",
                     "templHelbrecht",
-                    "admecDominus"
-            ),
+                    "admecDominus",
+                    "tauAunShi"),
+
+                    // Must haves
+                    Set.of("custoTrajann", "custoBladeChampion", "worldKharn")
+            );
+
             // Jealous Custodes shell
-            Set.of(
+            META_TEAMS.put( Set.of(
                     "worldKharn",
                     "emperExultant",
                     "orksWarboss",
@@ -30,10 +39,18 @@ public class MetaOrNot {
                     "custoBladeChampion",
                     "blackAbaddon",
                     "custoVexilusPraetor",
-                    "admecDominus"
-            ),
+                    "bloodDante",
+                    "admecDominus",
+                    "tauAunShi",
+                    "custoAtlacoya",
+                    "templHelbrecht"),
+
+                    // Must haves
+                    Set.of("custoTrajann", "custoBladeChampion", "emperExultant")
+            );
+
             // Mechs shell
-            Set.of(
+            META_TEAMS.put( Set.of(
                     "admecDominus",
                     "orksWarboss",
                     "admecRuststalker",
@@ -43,10 +60,14 @@ public class MetaOrNot {
                     "custoTrajann",
                     "templHelbrecht",
                     "necroSpyder",
-                    "tauCrisis"
-            ),
+                    "tauCrisis"),
+
+                    // Must haves
+                    Set.of("admecRuststalker", "admecMarshall", "admecManipulus")
+            );
+
             // Classic Neuro shell
-            Set.of(
+            META_TEAMS.put( Set.of(
                     "bloodMephiston",
                     "thousAhriman",
                     "tyranNeurothrope",
@@ -54,28 +75,40 @@ public class MetaOrNot {
                     "thousTzaangor",
                     "custoAtlacoya",
                     "genesMagus",
-                    "adeptCanoness"
-            ),
-            // Neuro 2.0 Shell
-            Set.of(
-                    "thousInfernalMaster",
+                    "adeptCanoness"),
+
+                    // Must haves
+                    Set.of("tyranNeurothrope", "thousAhriman", "thousInfernalMaster")
+            );
+
+            // Neuro 2.0 shell
+            META_TEAMS.put( Set.of(
                     "thousAhriman",
                     "tyranNeurothrope",
-                    "genesMagus",
-                    "thousTzaangor",
+                    "thousInfernalMaster",
+                    "blackPossession",
                     "blackAbaddon",
-                    "thousSorcerer"
-            ),
+                    "thousSorcerer",
+                    "tyranWingedPrime"),
+
+                    // Must haves
+                    Set.of("tyranNeurothrope", "thousInfernalMaster", "blackPossession")
+            );
+
             // Battlesuit shell
-            Set.of(
+            META_TEAMS.put( Set.of(
                     "eldarFarseer",
                     "tauFarsight",
                     "tauDarkstrider",
                     "admecManipulus",
                     "tauCrisis",
-                    "ultraCalgar"
-            )
-    );
+                    "ultraCalgar"),
+
+                    // Must haves
+                    Set.of("tauCrisis", "admecManipulus", "tauFarsight")
+            );
+
+    }
 
     // isMeta compares hero details from the entry, compares the team to META_TEAMS set and either returns true -> is META, or false -> isn't META
     public static boolean isMeta(Entry entry) {
@@ -85,8 +118,11 @@ public class MetaOrNot {
                 .collect(Collectors.toSet());
 
         // returns true if the heroes set contains at least 5 of the meta team in any order. Returns false if it does not match any.
-        return META_TEAMS.stream()
-                .anyMatch(meta -> heroes.stream().allMatch(meta::contains));
+        return META_TEAMS.entrySet().stream()
+                .anyMatch(meta ->
+                        meta.getKey().stream().filter(heroes::contains).count() >= 5
+                        && heroes.containsAll(meta.getValue())
+                );
     }
 
 }
