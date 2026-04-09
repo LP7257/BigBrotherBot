@@ -13,3 +13,5 @@ Bot has the following commands,
 
 Each command requires a time input (game has a separate timer) which is used to sort out already handled entries.
 If wanted, it can show the same entries as before, just by entering the same time input.
+
+Newly added type option. Type 1 is plain text format. Type 2 is using emojis
